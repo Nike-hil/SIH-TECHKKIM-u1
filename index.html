@@ -441,15 +441,77 @@
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl font-bold text-center mb-10 text-[#800000] select-none">Enhanced 360° Panoramic Views</h2>
             <p class="mb-8 text-lg text-center">Ultra-high definition panoramic experiences with AI narration and interactive hotspots.</p>
-            <div class="grid md:grid-cols-1 gap-8">
-                <!-- Panorama Viewer Container -->
-                <div id="panorama" style="width: 100%; height: 500px; background: #f0f0f0;"></div>
-                <div class="flex justify-between items-center mt-4">
-                    <div>
-                        <p class="text-center font-semibold">🏛️ Pemayangtse Monastery - 1705 AD</p>
-                        <p class="text-sm text-gray-600">🤖 AI Narration | 📱 AR Ready | 🎧 5 Languages</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Labrang Monastery -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="iframe-container" style="width: 100%; height: 400px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!4v1758084648321!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ2szZEwzbUFF!2m2!1d27.41800011005887!2d88.57945887534423!3f337.47!4f-8.64!5f0.7820865974627469" 
+                                width="100%" height="100%" style="border:0;" 
+                                allowfullscreen loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
-                    <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start AI Tour</button>
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <p class="text-center font-semibold">🏛️ Labrang Monastery</p>
+                            
+                        </div>
+                        <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start Tour</button>
+                    </div>
+                </div>
+
+                <!-- Rumtek Monastery -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="iframe-container" style="width: 100%; height: 400px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!4v1758085485864!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRDJnWVdjb2dF!2m2!1d27.2885258949387!2d88.56180959787903!3f80.09502015777818!4f6.604136024047364!5f0.7820865974627469" 
+                                width="100%" height="100%" style="border:0;" 
+                                allowfullscreen loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <p class="text-center font-semibold">🏛️ Rumtek Monastery</p>
+                            
+                        </div>
+                        <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start Tour</button>
+                    </div>
+                </div>
+
+                <!-- Dubdi Buddhist Monastery -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="iframe-container" style="width: 100%; height: 400px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!4v1758085936494!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRFVpdHkxNndF!2m2!1d27.36655288826205!2d88.22999220879571!3f59.26254438346032!4f-0.07244800922116212!5f0.7820865974627469" 
+                                width="100%" height="100%" style="border:0;" 
+                                allowfullscreen loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <p class="text-center font-semibold">🏛️ Dubdi Buddhist Monastery</p>
+                            
+                        </div>
+                        <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start Tour</button>
+                    </div>
+                </div>
+
+                <!-- Pemayangtse Monastery -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="iframe-container" style="width: 100%; height: 400px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!4v1758086190068!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREVoSlhucEFF!2m2!1d27.30518919282202!2d88.25156580066201!3f181.7334669772504!4f10.89071698794038!5f0.7820865974627469" 
+                                width="100%" height="100%" style="border:0;" 
+                                allowfullscreen loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <p class="text-center font-semibold">🏛️ Pemayangtse Monastery</p>
+                            
+                        </div>
+                        <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start Tour</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -678,7 +740,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the panorama viewer
     pannellum.viewer('panorama', {
         type: "equirectangular",
-        panorama: "pemayangste-monastery-in-sikkim-PTRYXG.jpg",
+        // Replace with your actual image path or URL
+        panorama: "",
         autoLoad: true,
         autoRotate: -2,
         compass: true,
