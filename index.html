@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techkkim - Enhanced Digital Heritage Platform for Sikkim's Monasteries</title>
+    <meta name="description" content="Explore Sikkim's monasteries digitally with virtual tours, AR experiences, live streaming, and AI-powered guides. Preserving cultural heritage with cutting-edge technology.">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#800000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50 opacity-95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4 relative">
+                <!-- Logo -->
+                <div class="text-2xl font-bold text-[#800000] select-none">Techkkim</div>
+                
+                <!-- Desktop Navigation -->
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="#home" class="text-gray-700 hover:text-[#800000] transition">Home</a></li>
+                    <li><a href="#features" class="text-gray-700 hover:text-[#800000] transition">Key Features</a></li>
+                    <li><a href="#tours" class="text-gray-700 hover:text-[#800000] transition">360° Views</a></li>
+                    <li><a href="#map" class="text-gray-700 hover:text-[#800000] transition">Interactive Map</a></li>
+                    <li><a href="#gmap" class="text-gray-700 hover:text-[#800000] transition">Reach a Monastery</a></li>
+                    <li><a href="#calendar" class="text-gray-700 hover:text-[#800000] transition">Calendar</a></li>
+                    <li><a href="#contact" class="text-gray-700 hover:text-[#800000] transition">Contact</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 hover:text-[#800000] focus:outline-none p-2" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu -->
+                <ul id="mobile-menu" class="mobile-menu absolute top-full right-0 w-64 bg-white shadow-lg rounded-lg py-2">
+                    <li><a href="#home" class="block px-4 py-2 hover:bg-gray-100">Home</a></li>
+                    <li><a href="#features" class="block px-4 py-2 hover:bg-gray-100">Key Features</a></li>
+                    <li><a href="#tours" class="block px-4 py-2 hover:bg-gray-100">360° Views</a></li>
+                    <li><a href="#map" class="block px-4 py-2 hover:bg-gray-100">Interactive Map</a></li>
+                    <li><a href="#gmap" class="block px-4 py-2 hover:bg-gray-100">Reach a Monastery</a></li>
+                    <li><a href="#calendar" class="block px-4 py-2 hover:bg-gray-100">Calendar</a></li>
+                    <li><a href="#contact" class="block px-4 py-2 hover:bg-gray-100">Contact</a></li>
+                </ul>
+
+                <!-- Language Selector (keeping only this one) -->
+                <div class="language-selector ml-4">
+                    <select id="langSelect" class="bg-white border rounded px-2 py-1">
+                        <option value="en">English</option>
+                        <option value="ne">नेपाली</option>
+                        <option value="bhutia">བོད་སྐད་</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-background relative h-screen flex items-center justify-center px-4 text-center">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2a4f375f-04f9-4560-a36d-b544a9f1d6e4.png" alt="Stunning panoramic view of Pemayangtse Monastery in Sikkim, nestled amid lush green hills and snow-capped peaks under a serene blue sky with traditional prayer flags fluttering in the gentle breeze" class="background-image" loading="lazy" />
+        <!-- Animated SVG Birds -->
+        <svg class="bird-svg" style="top: 20%; animation: flyRight1 20s linear infinite;" viewBox="0 0 64 64" aria-hidden="true">
+            <g><path d="M32 12c-4 0-8 4-8 8s4 8 8 8 8-4 8-8-4-8-8-8z" fill="#fff8dc" /><path class="wing" d="M24 20c2-4 8-4 10 0" stroke="#fff8dc" stroke-width="3" fill="none" /></g>
+        </svg>
+        <svg class="bird-svg" style="top: 40%; animation: flyRight2 25s linear infinite 5s;" viewBox="0 0 64 64" aria-hidden="true">
+            <g><path d="M32 12c-4 0-8 4-8 8s4 8 8 8 8-4 8-8-4-8-8-8z" fill="#fff8dc" /><path class="wing" d="M24 20c2-4 8-4 10 0" stroke="#fff8dc" stroke-width="3" fill="none" /></g>
+        </svg>
+        <svg class="bird-svg" style="top: 60%; animation: flyRight3 22s linear infinite 10s;" viewBox="0 0 64 64" aria-hidden="true">
+            <g><path d="M32 12c-4 0-8 4-8 8s4 8 8 8 8-4 8-8-4-8-8-8z" fill="#fff8dc" /><path class="wing" d="M24 20c2-4 8-4 10 0" stroke="#fff8dc" stroke-width="3" fill="none" /></g>
+        </svg>
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="relative z-10 hero-text text-white max-w-xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg select-none">Techkkim</h1>
+            <p class="text-xl md:text-2xl mb-4 font-light">Enhanced Digital Heritage Platform</p>
+            <p class="text-lg mb-8 opacity-90">Experience Sikkim's monasteries with AI, AR & Live streaming</p>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <a href="#tours" class="btn-gradient" role="button" tabindex="0">🎥 360 Tour</a>
+                <a href="#live-hub" class="btn-gradient" role="button" tabindex="0">📺 Archives</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 bg-gradient-to-r from-[#fff8e1] to-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-10 text-[#800000] select-none">About Enhanced Techkkim</h2>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Next-Generation Heritage Platform</h3>
+                    <p class="mb-4">Sikkim is home to over 200 monasteries, many dating back to the 17th and 18th centuries. Our enhanced platform now combines traditional virtual tours with cutting-edge AI, Augmented Reality, and live streaming technology.</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>AI-powered monastery guide and chatbot</li>
+                        <li>Augmented Reality monastery identification</li>
+                        <li>Voice search in multiple languages</li>
+                        <li>Virtual meditation sessions with monks</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Our Enhanced Mission</h3>
+                    <p class="mb-4">To create the world's most advanced digital heritage preservation platform, making Sikkim's monasteries accessible globally through immersive technology while supporting local communities.</p>
+                    <div class="bg-white p-4 rounded-lg shadow-lg">
+                        <h4 class="font-bold text-[#800000] mb-2">🎯 SIH Innovation Goals:</h4>
+                        <p class="text-sm">Combining cultural preservation with modern technology to create sustainable tourism and educational opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section id="features" class="py-16 px-4 section-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-10 text-[#800000] select-none">Enhanced Key Features</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Virtual Tours -->
+                <div class="feature-box bg-gradient-to-br from-purple-100 to-indigo-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3eb146d2-9782-4e05-91aa-79f4f2370c19.png" alt="Serene view of a Tibetan-style monastery with monks in orange robes amidst green hills and golden prayer flags, capturing the essence of spiritual exploration" loading="lazy" class="rounded-lg mb-4 w-full" />
+                    <h3 class="text-xl font-semibold text-[#800000] mb-2">🎥 AI-Enhanced Virtual Tours</h3>
+                    <p class="text-gray-700 mb-2">360° panoramic views with AI-powered narration, voice control, and personalized recommendations based on your interests.</p>
+                    <button class="btn-gradient" type="button" onclick="startVirtualTour()">Explore Tours</button>
+                </div>
+                <!-- AR Integration -->
+                <div class="feature-box bg-gradient-to-br from-green-100 to-teal-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/13a22ef9-e9d3-4399-b008-405cacdb8ac7.png" alt="Modern smartphone displaying an interactive audio guide interface with holographic monastery map and audio waves emanating from the device" loading="lazy" class="rounded-lg mb-4 w-full" />
+                    <h3 class="text-xl font-semibold text-[#800000] mb-2">📱 Augmented Reality Mode</h3>
+                    <p class="text-gray-700 mb-2">Point your camera at monastery images for instant information, 3D models, and interactive overlays with historical details.</p>
+                    <button class="btn-gradient" type="button" onclick="activateAR()">Try AR Mode</button>
+                </div>
+                <!-- Interactive Map -->
+                <div class="feature-box bg-gradient-to-br from-yellow-100 to-orange-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95f6e6d0-426a-4d52-8213-ab0a6ba2def0.png" alt="Detailed digital map of Sikkim highlighting monastery locations with colorful pins, mountains in the background, and integrated travel routes for tourists" loading="lazy" class="rounded-lg mb-4 w-full" />
+                    <h3 class="text-xl font-semibold text-[#800000] mb-2">🗺️ Smart Interactive Map</h3>
+                    <p class="text-gray-700 mb-2">AI-powered route planning with weather integration, real-time monastery status, and voice-guided navigation.</p>
+                    <button class="btn-gradient" type="button">View Smart Map</button>
+                </div>
+                <!-- Digital Archives -->
+                <div class="feature-box bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-8 mb-4 text-white text-center">
+                    <h4 class="text-3xl">🤖</h4>
+                    <p>AI Monastery Guide</p>
+                </div>
+                <h3 class="text-xl font-semibold text-[#800000] mb-2">Intelligent AI Assistant</h3>
+                <p class="text-gray-700 mb-4">24/7 AI guide answering questions about monasteries, festivals, Buddhist practices, and travel planning.</p>
+                <button class="btn-gradient w-full" onclick="openChatbot()">Ask AI Guide</button>
+            </div>
+
+            <!-- Book Tickets -->
+            <div class="feature-box bg-white rounded-lg shadow-lg p-6">
+                <img src="https://aapnasafar.com/wp-content/uploads/2024/05/buddhaprkoctbr.jpg" alt="Book monastery tickets" class="rounded-lg mb-4 w-full h-48 object-cover" />
+                <h3 class="text-xl font-semibold text-[#800000] mb-2">Book your Tickets</h3>
+                <p class="text-gray-700 mb-4">Book your tickets for monastery visits with real-time availability and instant confirmation.</p>
+                <button class="btn-gradient w-full" onclick="bookTickets()">Book Tickets</button>
+            </div>
+
+            <!-- AI Archives -->
+            <div class="feature-box bg-white rounded-lg shadow-lg p-6">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0300a514-6c23-471e-b3b0-58218d3f7379.png" alt="AI-Powered Archives" class="rounded-lg mb-4 w-full h-48 object-cover" />
+                <h3 class="text-xl font-semibold text-[#800000] mb-2">AI-Powered Archives</h3>
+                <p class="text-gray-700 mb-4">Advanced OCR text recognition, multi-language translation, and machine learning categorization of historical documents.</p>
+                <button class="btn-gradient w-full" onclick="browseArchives()">Browse Archives</button>
+            </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Virtual Tours Section -->
+    <section id="tours" class="py-16 px-4 section-bg">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-10 text-[#800000] select-none">Enhanced Virtual Tours</h2>
+            <p class="mb-8 text-lg">Immersive 360° experiences with AI narration, voice commands, and personalized recommendations.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Replace line 157 with this -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 transition-transform">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e49905f6-8eae-4aec-8220-14e78f27c7c4.png" alt="Interior 360 view of Rumtek Monastery showcasing intricate murals and golden statues" loading="lazy" class="rounded-md" />
+                    <h3 class="text-xl font-semibold mt-4">🏛️ Rumtek Monastery</h3>
+                    <p class="mb-2">AI-narrated tours in English, Nepali, Bhutia, and Lepcha with voice interaction.</p>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.9/5 | 👥 2,847 visitors | 🎥 4K Quality
+                    </div>
+                    <button class="btn-gradient" type="button">🎥 Start AI Tour</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 transition-transform">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b357f18-02df-4336-8cf3-25c15daea2c4.png" alt="Panoramic exterior of Pemayangtse Monastery with traditional Tibetan architecture" loading="lazy" class="rounded-md" />
+                    <h3 class="text-xl font-semibold mt-4">⛩️ Pemayangtse Monastery</h3>
+                    <p class="mb-2">Explore 300+ years of history with interactive hotspots and AR overlays.</p>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.8/5 | 👥 1,956 visitors | 📱 AR Ready
+                    </div>
+                    <button class="btn-gradient" type="button">🎥 Start AR Tour</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 transition-transform">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5d82f8bf-13d8-4b81-bbe3-d9aa1ff0b012.png" alt="Detailed 360° view of Enchey Monastery gardens and prayer halls" loading="lazy" class="rounded-md" />
+                    <h3 class="text-xl font-semibold mt-4">🌸 Enchey Monastery</h3>
+                    <p class="mb-2">Voice-guided meditation walks through sacred gardens and prayer halls.</p>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.7/5 | 👥 1,234 visitors | 🎧 Audio Guide
+                    </div>
+                    <button class="btn-gradient" type="button">🎥 Start Voice Tour</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Replace the existing map section in index.html with this code -->
+<!-- Virtual Tours Section - Remove hover:scale-105 -->
+<div class="bg-white rounded-lg shadow-lg p-6 transition-transform">
+<!-- Footer Section - Remove hover:scale-110 -->
+<div class="flex space-x-3 mb-4">
+    <img src="..." class="w-8 h-8 cursor-pointer" />
+    <img src="..." class="w-8 h-8 cursor-pointer" />
+    <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-xs font-bold cursor-pointer">TW</div>
+    <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center text-xs font-bold cursor-pointer">YT</div>
+</div>
+<!-- Instead of classes with hover:scale-110 transition-transform -->
+    <section id="map" class="py-16 px-4 bg-sky-100">
+    <div class="max-w-7xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-10 text-[#800000] select-none">Interactive Map</h2>
+        <p class="mb-8 text-lg">Smart route planning with weather integration, real-time monastery status, and voice navigation.</p>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <!-- Google Maps Embed -->
+            <div class="iframe-container mb-6">
+                <!-- <iframe
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDB9-XXx4xQTBRNX5ZOSfxBwXWhmtaYmtc&q=Sikkim+Monasteries&center=27.3516,88.3239&zoom=10"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe> -->
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1s0C2n5BdfcbnMCujOdgtKDlM06nqbHo&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3541.8093644029263!2d88.58124021156812!3d27.4128762383182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6bba53187e157%3A0xefa19c90b60b6591!2sPhodong%20Monastery!5e0!3m2!1sen!2sin!4v1758041077179!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+            </div>
+            <!-- Map Features -->
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="text-center">
+                    <h4 class="font-bold text-[#800000]">🗣 Voice Navigation</h4>
+                    <p class="text-sm">Ask "Guide me to Rumtek" for spoken directions</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-bold text-[#800000]">🌤 Weather Integration</h4>
+                    <p class="text-sm">Real-time weather and best visit times</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-bold text-[#800000]">🚌 Smart Transport</h4>
+                    <p class="text-sm">Book local transport and guided tours</p>
+                </div>
+            </div>
+            <button class="btn-gradient mt-6" type="button" onclick="window.open('https://www.google.com/maps/search/sikkim+monasteries', '_blank')">
+                🗺 Open in Google Maps
+            </button>
+        </div>
+    </div>
+</section>
+
+    <!-- Interactive Map Section -->
+    <!-- <section id="map" class="py-16 px-4 bg-sky-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-10 text-[#800000] select-none">AI-Powered Interactive Map</h2>
+            <p class="mb-8 text-lg">Smart route planning with weather integration, real-time monastery status, and voice navigation.</p>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ea1a9616-ee8b-4755-ac60-b0a5dc65f096.png" alt="Interactive map of Sikkim showing monastery locations with geo-tags, travel routes, and nearby attractions like hiking trails and hotels" loading="lazy" />
+                <div class="grid md:grid-cols-3 gap-6 mt-6">
+                    <div class="text-center">
+                        <h4 class="font-bold text-[#800000]">🗣️ Voice Navigation</h4>
+                        <p class="text-sm">Ask "Guide me to Rumtek" for spoken directions</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-bold text-[#800000]">🌤️ Weather Integration</h4>
+                        <p class="text-sm">Real-time weather and best visit times</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-bold text-[#800000]">🚌 Smart Transport</h4>
+                        <p class="text-sm">Book local transport and guided tours</p>
+                    </div>
+                </div>
+                <button class="btn-gradient mt-6" type="button">🗺️ Open Smart Map</button>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Digital Archives Section -->
+    <section id="archives" class="py-16 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-10 text-[#800000] select-none">AI-Enhanced Digital Archives</h2>
+            <p class="mb-8 text-lg">Advanced OCR, multi-language translation, and machine learning categorization of historical documents.</p>
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e221119a-7072-421a-87d7-334ef3bb31cd.png" alt="Scanned manuscript page from ancient Sikkim monastery with Tibetan script" loading="lazy" class="rounded-md" />
+                    <p class="mt-2 text-sm font-semibold">📜 Ancient Manuscripts</p>
+                    <p class="text-xs text-gray-600">AI-translated to 12 languages</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/46960e6b-5083-4c00-ab8f-f062a6571731.png" alt="High-resolution scan of colorful monastery mural depicting Buddhist deities" loading="lazy" class="rounded-md" />
+                    <p class="mt-2 text-sm font-semibold">🎨 Artistic Murals</p>
+                    <p class="text-xs text-gray-600">HD scans with zoom details</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7ac2d195-c85b-4b5f-b0f8-dba1f52d7395.png" alt="Digitized historical document with seals and illustrations" loading="lazy" class="rounded-md" />
+                    <p class="mt-2 text-sm font-semibold">📋 Historical Documents</p>
+                    <p class="text-xs text-gray-600">Timeline-organized</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/16825364-5037-4f37-9893-bd14d96bfd96.png" alt="Interactive digital catalog for searching archival content" loading="lazy" class="rounded-md" />
+                    <p class="mt-2 text-sm font-semibold">🔍 AI Search Engine</p>
+                    <p class="text-xs text-gray-600">Visual & text recognition</p>
+                </div>
+            </div>
+            <div class="search-container max-w-lg mx-auto">
+                <input type="text" placeholder="Search archives with voice or text..." class="search-input" id="archive-search" />
+                <button class="voice-button" id="voice-archive-search" title="Voice Search">🎤</button>
+                <button class="search-button" onclick="searchArchives()">🔍 Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Learning Platform -->
+    <section id="community" class="py-16 px-4 section-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-10 text-[#800000] select-none">Community & Learning Hub</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-[#800000]">🗨️ Visitor Forum</h3>
+                    <p class="mb-4">Connect with fellow travelers, researchers, and monastery enthusiasts from around the world.</p>
+                    <div class="space-y-3">
+                        <div class="bg-gray-50 p-3 rounded-lg border-l-4 border-[#FFC107]">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 bg-[#800000] rounded-full flex items-center justify-center text-white text-xs font-bold">JD</div>
+                                <span class="ml-2 font-semibold text-sm">John Doe</span>
+                                <span class="ml-auto text-xs text-gray-500">2 hours ago</span>
+                            </div>
+                            <p class="text-sm">"The virtual meditation session was incredibly peaceful. Highly recommend!"</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border-l-4 border-[#FFC107]">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 bg-[#800000] rounded-full flex items-center justify-center text-white text-xs font-bold">MP</div>
+                                <span class="ml-2 font-semibold text-sm">Maya Patel</span>
+                                <span class="ml-auto text-xs text-gray-500">1 day ago</span>
+                            </div>
+                            <p class="text-sm">"Can anyone share the best route to reach Pemayangtse during monsoon?"</p>
+                        </div>
+                    </div>
+                    <button class="btn-gradient mt-4 w-full">Join Community Discussion</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-[#800000]">🎓 Virtual Buddhist Studies</h3>
+                    <p class="mb-4">Learn from resident monks and Buddhist scholars through interactive courses.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-sm">Introduction to Buddhism</h4>
+                            <p class="text-xs text-gray-600">45 min course</p>
+                            <p class="text-xs text-green-600">✓ 234 completed</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-sm">Monastery Architecture</h4>
+                            <p class="text-xs text-gray-600">30 min course</p>
+                            <p class="text-xs text-blue-600">🔴 Live now</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-sm">Tibetan Art History</h4>
+                            <p class="text-xs text-gray-600">60 min course</p>
+                            <p class="text-xs text-gray-600">Starting soon</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-sm">Meditation Practices</h4>
+                            <p class="text-xs text-gray-600">20 min daily</p>
+                            <p class="text-xs text-orange-600">⭐ Most popular</p>
+                        </div>
+                    </div>
+                    <button class="btn-gradient mt-4 w-full">Start Learning Journey</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Calendar Section -->
+    <section id="calendar" class="py-16 px-4 bg-gradient-to-r from-[#fff8e1] to-gray-100">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-10 text-[#800000]">Cultural Calendar</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Calendar Widget -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div id="calendar-widget">
+                    <div class="calendar-header flex items-center justify-between mb-4">
+                        <button id="cal-prev" class="btn-gradient text-sm px-3 py-1">◀</button>
+                        <div id="cal-title" class="font-bold text-[#800000]"></div>
+                        <button id="cal-next" class="btn-gradient text-sm px-3 py-1">▶</button>
+                    </div>
+                    <div class="calendar-weekdays grid grid-cols-7 gap-1 text-xs font-semibold text-gray-600 mb-2">
+                        <div class="text-center p-2">Sun</div>
+                        <div class="text-center p-2">Mon</div>
+                        <div class="text-center p-2">Tue</div>
+                        <div class="text-center p-2">Wed</div>
+                        <div class="text-center p-2">Thu</div>
+                        <div class="text-center p-2">Fri</div>
+                        <div class="text-center p-2">Sat</div>
+                    </div>
+                    <div id="calendar-days" class="calendar-grid grid grid-cols-7 gap-1"></div>
+                    <button id="cal-show-all" class="btn-gradient text-sm mt-4 w-full py-2">Show All Events</button>
+                </div>
+            </div>
+
+            <!-- Goddess Image -->
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/08c0040c-31bd-485d-a52f-f8e22e54c853.png" 
+                     alt="Tara, the benevolent goddess" 
+                     class="w-full h-[300px] object-cover rounded-lg" 
+                     loading="lazy" />
+                <p class="mt-4 text-center italic text-gray-700">Tara, the benevolent goddess revered in Sikkim for protection and wisdom.</p>
+            </div>
+
+            <!-- Events List -->
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-auto" style="max-height: 500px;">
+                <h3 class="text-xl font-bold text-[#800000] mb-4">Upcoming Events</h3>
+                <div id="events-container" class="space-y-4">
+                    <!-- Events will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 360° Panoramic Views Section -->
+    <section id="panoramic" class="py-16 px-4 section-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-10 text-[#800000] select-none">Enhanced 360° Panoramic Views</h2>
+            <p class="mb-8 text-lg text-center">Ultra-high definition panoramic experiences with AI narration and interactive hotspots.</p>
+            <div class="grid md:grid-cols-1 gap-8">
+                <!-- Panorama Viewer Container -->
+                <div id="panorama" style="width: 100%; height: 500px; background: #f0f0f0;"></div>
+                <div class="flex justify-between items-center mt-4">
+                    <div>
+                        <p class="text-center font-semibold">🏛️ Pemayangtse Monastery - 1705 AD</p>
+                        <p class="text-sm text-gray-600">🤖 AI Narration | 📱 AR Ready | 🎧 5 Languages</p>
+                    </div>
+                    <button class="btn-gradient" onclick="startPanoramicTour()">🎥 Start AI Tour</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+// Add this script to handle calendar functionality
+document.addEventListener('DOMContentLoaded', async () => {
+    const eventsContainer = document.getElementById('events-container');
+    const calDays = document.getElementById('calendar-days');
+    const calTitle = document.getElementById('cal-title');
+    const calPrev = document.getElementById('cal-prev');
+    const calNext = document.getElementById('cal-next');
+    const calShowAll = document.getElementById('cal-show-all');
+
+    let calendarEvents = [];
+    let current = new Date();
+
+    function renderEventCards(list) {
+        eventsContainer.innerHTML = '';
+        list.forEach(event => {
+            const eventCard = `
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow" data-date="${event.date}">
+                    <h3 class="text-xl font-bold text-[#800000] mb-2">${event.name}</h3>
+                    <p class="text-gray-600 mb-2">${event.date}</p>
+                    <p class="text-gray-800 mb-4">${event.description}</p>
+                    <div class="text-sm text-gray-600">
+                        <p>Location: ${event.location}</p>
+                        <p>Category: ${event.category}</p>
+                    </div>
+                    ${Array.isArray(event.traditions) && event.traditions.length ? `
+                    <div class="mt-4">
+                        <h4 class="font-semibold mb-2">Traditions:</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700">
+                            ${event.traditions.map(tradition => `<li>${tradition}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
+                    <button class="btn-gradient text-sm mt-4" onclick="registerEvent(${event.id})">📅 Register Now</button>
+                </div>
+            `;
+            eventsContainer.insertAdjacentHTML('beforeend', eventCard);
+        });
+    }
+
+    function normalizeDateString(dateStr) {
+        // Supports formats like YYYY-MM-DD or DD/MM/YYYY
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+        const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        if (m) {
+            const [_, d, mo, y] = m;
+            return `${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        }
+        // Fallback: try Date parsing
+        const d = new Date(dateStr);
+        if (!isNaN(d)) {
+            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+        return dateStr;
+    }
+
+    function getEventsByDateMap() {
+        const map = new Map();
+        calendarEvents.forEach(ev => {
+            const key = normalizeDateString(ev.date);
+            if (!map.has(key)) map.set(key, []);
+            map.get(key).push(ev);
+        });
+        return map;
+    }
+
+    function renderCalendar(year, monthIndex) {
+        const firstDay = new Date(year, monthIndex, 1);
+        const startWeekday = firstDay.getDay();
+        const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+        const today = new Date();
+        const byDate = getEventsByDateMap();
+
+        calTitle.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${year}`;
+        calDays.innerHTML = '';
+
+        for (let i = 0; i < startWeekday; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'calendar-day empty';
+            calDays.appendChild(empty);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateObj = new Date(year, monthIndex, day);
+            const key = `${year}-${String(monthIndex + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+            const cell = document.createElement('button');
+            cell.type = 'button';
+            cell.className = 'calendar-day';
+            cell.textContent = String(day);
+
+            if (
+                dateObj.getFullYear() === today.getFullYear() &&
+                dateObj.getMonth() === today.getMonth() &&
+                dateObj.getDate() === today.getDate()
+            ) {
+                cell.classList.add('today');
+            }
+
+            if (byDate.has(key)) {
+                cell.classList.add('has-event');
+                cell.setAttribute('aria-label', `${byDate.get(key).length} event(s) on ${key}`);
+                cell.addEventListener('click', () => {
+                    renderEventCards(byDate.get(key));
+                    if (window.techkkim) {
+                        window.techkkim.showNotification(`📅 Showing events for ${key}`, 'info');
+                    }
+                });
+            } else {
+                cell.disabled = true;
+            }
+
+            calDays.appendChild(cell);
+        }
+    }
+
+    calPrev?.addEventListener('click', () => {
+        current.setMonth(current.getMonth() - 1);
+        renderCalendar(current.getFullYear(), current.getMonth());
+    });
+    calNext?.addEventListener('click', () => {
+        current.setMonth(current.getMonth() + 1);
+        renderCalendar(current.getFullYear(), current.getMonth());
+    });
+    calShowAll?.addEventListener('click', () => {
+        renderEventCards(calendarEvents);
+    });
+
+    try {
+        const response = await fetch('http://localhost:8080/api/calendar');
+        const events = await response.json();
+        calendarEvents = Array.isArray(events) ? events : [];
+        renderEventCards(calendarEvents);
+        renderCalendar(current.getFullYear(), current.getMonth());
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        eventsContainer.innerHTML = '<p class="text-red-500">Failed to load events. Please try again later.</p>';
+    }
+});
+
+function registerEvent(eventId) {
+    // Placeholder function for event registration
+    alert(`Registered for event ID: ${eventId}`);
+}
+</script>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#800000] text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-4">📞 Contact Us</h3>
+                <p>Email: info@techkkim.com</p>
+                <p>Phone: +91-123-456-7890</p>
+                <p class="mt-2 text-sm opacity-90">🤖 24/7 AI Support Available</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">🔗 Quick Links</h3>
+                <ul class="space-y-1">
+                    <li><a href="#home" class="hover:text-[#FFC107] text-sm">Home</a></li>
+                    <li><a href="#features" class="hover:text-[#FFC107] text-sm">Enhanced Features</a></li>
+                    <li><a href="#live-hub" class="hover:text-[#FFC107] text-sm">Live Experiences</a></li>
+                    <li><a href="#community" class="hover:text-[#FFC107] text-sm">Community</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">🌐 Follow Us</h3>
+                <div class="flex space-x-3 mb-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8d183e59-b697-47a6-a53e-6fe14a97659e.png" alt="Facebook" class="w-8 h-8 hover:scale-110 transition-transform cursor-pointer" />
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8a48c922-4c42-4afb-abc4-8ec537c9553f.png" alt="Instagram" class="w-8 h-8 hover:scale-110 transition-transform cursor-pointer" />
+                    <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-xs font-bold cursor-pointer hover:scale-110 transition-transform">TW</div>
+                    <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center text-xs font-bold cursor-pointer hover:scale-110 transition-transform">YT</div>
+                </div>
+                <p class="text-xs opacity-75">🏆 SIH 2025 Innovation Project</p>
+            </div>
+        </div>
+        <p class="text-center mt-8 text-sm opacity-90">© 2025 Enhanced Techkkim. Preserving Heritage with AI & AR Technology. 🇮🇳</p>
+    </footer>
+
+    <!-- Enhanced JavaScript -->
+    <script src="script.js">
+    </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the panorama viewer
+    pannellum.viewer('panorama', {
+        type: "equirectangular",
+        panorama: "pemayangste-monastery-in-sikkim-PTRYXG.jpg",
+        autoLoad: true,
+        autoRotate: -2,
+        compass: true,
+        hotSpots: [
+            {
+                pitch: 14.1,
+                yaw: 1.5,
+                type: "info",
+                text: "Main Prayer Hall",
+                cssClass: "custom-hotspot"
+            },
+            {
+                pitch: -9.4,
+                yaw: 222.6,
+                type: "info",
+                text: "Ancient Shrine",
+                cssClass: "custom-hotspot"
+            }
+        ]
+    });
+});
+
+function startPanoramicTour() {
+    // Add your tour logic here
+    alert('Starting AI-guided panoramic tour...');
+}
+</script>
+
+<style>
+.custom-hotspot {
+    background-color: rgba(200, 0, 0, 0.8);
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-hotspot:hover {
+    background-color: rgba(200, 0, 0, 1);
+    transform: scale(1.1);
+}
+</style>
+</body>
+</html>
